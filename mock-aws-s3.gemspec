@@ -9,18 +9,35 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Joshua Krall"]
-  s.date = %q{2010-09-27}
+  s.date = %q{2010-10-01}
   s.description = %q{A Mock AWS::S3 so you can use it in your tests without hitting the network.}
   s.email = %q{joshuakrall@pobox.com}
   s.extra_rdoc_files = [
     "LICENSE",
      "README.rdoc"
   ]
+  s.files = [
+    "LICENSE",
+     "README.rdoc",
+     "Rakefile",
+     "VERSION",
+     "lib/mock-aws-s3.rb",
+     "lib/mock/aws/s3/object.rb",
+     "mock-aws-s3.gemspec",
+     "pkg/mock-aws-s3-0.1.0.gem",
+     "spec/mock-aws-s3_spec.rb",
+     "spec/spec.opts",
+     "spec/spec_helper.rb"
+  ]
   s.homepage = %q{http://github.com/jkrall/mock-aws-s3}
   s.rdoc_options = ["--charset=UTF-8"]
   s.require_paths = ["lib"]
   s.rubygems_version = %q{1.3.7}
   s.summary = %q{A Mock AWS::S3 so you can use it in your tests without hitting the network}
+  s.test_files = [
+    "spec/mock-aws-s3_spec.rb",
+     "spec/spec_helper.rb"
+  ]
 
   if s.respond_to? :specification_version then
     current_version = Gem::Specification::CURRENT_SPECIFICATION_VERSION
