@@ -13,7 +13,7 @@ module AWS
         end
 
 				def find(key, bucket = nil)
-					raise NoSuchKey.new("No such key `#{key}'", bucket) unless exists?(bucket, key)
+					raise NoSuchKey.new("No such key `#{key}'", bucket) unless exists?(key, bucket)
 					bucket = Bucket.new(:name => bucket)
 					object = bucket.new_object
 					object.key = key
@@ -25,19 +25,6 @@ module AWS
         #   Value.new Response.new(:body=>data)
         #   value(key, bucket, options) do |response|
         #     response.read_body(&block)
-        #   end
-        # end
-
-        # # Returns the object whose key is <tt>name</tt> in the specified bucket. If the specified key does not
-        # # exist, a NoSuchKey exception will be raised.
-        # def find(key, bucket = nil)
-        #   key    = key.remove_extended unless key.valid_utf8?
-        #   bucket = Bucket.find(bucket_name(bucket), :marker => key.previous, :max_keys => 1)
-        #   # If our heuristic failed, trigger a NoSuchKey exception
-        #   if (object = bucket.objects.first) && object.key == key
-        #     object
-        #   else
-        #     raise NoSuchKey.new("No such key `#{key}'", bucket)
         #   end
         # end
 
