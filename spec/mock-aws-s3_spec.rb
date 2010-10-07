@@ -73,6 +73,14 @@ describe "Mock::AWS::S3" do
         AWS::S3::S3Object.value('key', 'bucket')
       end
     end
+		describe '#find' do
+      before(:each) { create_test_file 'key' }
+      after(:each) { remove_test_file 'key' }
+      it 'should not do an actual request' do
+        AWS::S3::Base.should_not_receive(:get)
+        AWS::S3::S3Object.find('key', 'bucket')
+      end
+		end
   end
 
 end
