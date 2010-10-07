@@ -12,6 +12,14 @@ module AWS
           Value.new OpenStruct.new(:body=>data)
         end
 
+				def find(key, bucket = nil)
+					raise NoSuchKey.new("No such key `#{key}'", bucket) unless exists?(bucket, key)
+					bucket = Bucket.new(:name => bucket)
+					object = bucket.new_object
+					object.key = key
+					object	
+				end
+
         # def stream(key, bucket = nil, options = {}, &block)
         #   data = File.open(path!(bucket, key, options)) {|f| f.read}
         #   Value.new Response.new(:body=>data)
