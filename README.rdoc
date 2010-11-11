@@ -10,9 +10,11 @@ From there on, all (supported) calls to AWS::S3::S3Object will be proxied to fil
 
     AWS::S3::S3Object.store 'key', 'some data', 'bucket'
     AWS::S3::S3Object.exists?('key', 'bucket')
+    AWS::S3::S3Object.value 'key', 'bucket'
+    AWS::S3::S3Object.url_for 'key', 'bucket'
     AWS::S3::S3Object.delete('key', 'bucket')
 
-... will result in a file being created on disk at <tt>./tmp/mock-aws-s3/bucket/key</tt>, with contents: <tt>"some data"</tt>.  A <tt>File.exists?()</tt> check will be performed on that file, and then it will be deleted.
+... will result in a file being created on disk at <tt>./tmp/mock-aws-s3/bucket/key</tt>, with contents: <tt>"some data"</tt>.  A <tt>File.exists?()</tt> check will be performed on that file, the content of the file will be returned, a local file uri will be return and then it will be deleted.
 
 If you are using Rails, the <tt>Rails.root</tt> directory will be used: <tt>Rails.root.join('tmp')</tt>.
 
