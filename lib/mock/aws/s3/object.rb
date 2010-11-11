@@ -12,6 +12,10 @@ module AWS
           Value.new OpenStruct.new(:body=>data)
         end
 
+				def url_for(key, bucket = nil)
+          "file://#{File.expand_path(path!(bucket, key))}"
+				end
+
 				def find(key, bucket = nil)
 					raise NoSuchKey.new("No such key `#{key}'", bucket) unless exists?(key, bucket)
 					bucket = Bucket.new(:name => bucket)

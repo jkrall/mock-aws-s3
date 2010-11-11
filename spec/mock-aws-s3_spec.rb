@@ -81,6 +81,18 @@ describe "Mock::AWS::S3" do
         AWS::S3::S3Object.find('key', 'bucket')
       end
 		end
+		describe '#url_for' do
+      before(:each) { create_test_file 'key' }
+      after(:each) { remove_test_file 'key' }
+      it 'should not do an actual request' do
+        AWS::S3::Base.should_not_receive(:get)
+        AWS::S3::S3Object.url_for('key', 'bucket')
+      end
+			it 'should return a local file uri' do
+				url = AWS::S3::S3Object.url_for('key', 'bucket')
+				url.should == 'file://' + File.expand_path(File.dirname(__FILE__) + '/../tmp/mock-aws-s3/bucket/key')
+			end
+		end
   end
 
 end
