@@ -12,7 +12,7 @@ module AWS
           Value.new OpenStruct.new(:body=>data)
         end
 
-				def url_for(key, bucket = nil)
+				def url_for(key, bucket = nil, options={})
           "file://#{File.expand_path(path!(bucket, key))}"
 				end
 
@@ -21,7 +21,7 @@ module AWS
 					bucket = Bucket.new(:name => bucket)
 					object = bucket.new_object
 					object.key = key
-					object	
+					object
 				end
 
         # def stream(key, bucket = nil, options = {}, &block)
