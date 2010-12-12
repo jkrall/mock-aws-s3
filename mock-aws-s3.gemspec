@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{mock-aws-s3}
-  s.version = "0.4.0"
+  s.version = "0.5.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Joshua Krall"]
-  s.date = %q{2010-11-11}
+  s.date = %q{2010-12-09}
   s.description = %q{A Mock AWS::S3 so you can use it in your tests without hitting the network.}
   s.email = %q{joshuakrall@pobox.com}
   s.extra_rdoc_files = [
@@ -24,7 +24,6 @@ Gem::Specification.new do |s|
      "lib/mock-aws-s3.rb",
      "lib/mock/aws/s3/object.rb",
      "mock-aws-s3.gemspec",
-     "pkg/mock-aws-s3-0.1.0.gem",
      "spec/mock-aws-s3_spec.rb",
      "spec/spec.opts",
      "spec/spec_helper.rb"
