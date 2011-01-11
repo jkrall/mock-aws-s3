@@ -1,4 +1,4 @@
-require 'ftools'
+require 'fileutils'
 require 'ostruct'
 
 module AWS
@@ -38,7 +38,7 @@ module AWS
           bucket          = bucket_name(bucket)
           source_key      = path!(bucket, key)
           target_key      = path!(bucket, copy_key)
-          File.makedirs File.dirname(target_key)
+          FileUtils.makedirs File.dirname(target_key)
           FileUtils.cp_r source_key, target_key
         end
 
@@ -68,7 +68,7 @@ module AWS
           path = path!(bucket, key, options)
           infer_content_type!(key, options)
 
-          File.makedirs File.dirname(path)
+          FileUtils.makedirs File.dirname(path)
           File.open(path, 'wb') do |f|
             f.write data
           end
