@@ -61,7 +61,7 @@ module AWS
 
         def store(key, data, bucket = nil, options = {})
           validate_key!(key)
-          data = data.read if data.kind_of?(IO)
+          data = data.read if data.respond_to?(:read)
 
           # Must build path before infering content type in case bucket is being used for options
           path = path!(bucket, key, options)
