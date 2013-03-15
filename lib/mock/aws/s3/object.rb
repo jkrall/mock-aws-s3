@@ -12,26 +12,23 @@ module AWS
           Value.new OpenStruct.new(:body=>data)
         end
 
-				def url_for(key, bucket = nil, options={})
+        def url_for(key, bucket = nil, options={})
           "file://#{File.expand_path(path!(bucket, key))}"
-				end
+        end
 
-				def find(key, bucket = nil)
-					raise NoSuchKey.new("No such key `#{key}'", bucket) unless exists?(key, bucket)
-					bucket = Bucket.new(:name => bucket)
-					object = bucket.new_object
-					object.key = key
-					object
-				end
+        def find(key, bucket = nil)
+          raise NoSuchKey.new("No such key `#{key}'", bucket) unless exists?(key, bucket)
+          bucket = Bucket.new(:name => bucket)
+          object = bucket.new_object
+          object.key = key
+          object
+        end
 
-        # def stream(key, bucket = nil, options = {}, &block)
-        #   data = File.open(path!(bucket, key, options)) {|f| f.read}
-        #   Value.new Response.new(:body=>data)
-        #   value(key, bucket, options) do |response|
-        #     response.read_body(&block)
-        #   end
-        # end
-
+        def stream(key, bucket = nil, options = {}, &block)
+          data = File.open(path!(bucket, key, options)) {|f| f.read}
+          value = Value.new(OpenStruct.new(:body=>data))
+          yield value
+        end
 
         # Makes a copy of the object with <tt>key</tt> to <tt>copy_key</tt>, preserving the ACL of the existing object if the <tt>:copy_acl</tt> option is true (default false).
         def copy(key, copy_key, bucket = nil, options = {})
@@ -64,6 +61,8 @@ module AWS
 
         def store(key, data, bucket = nil, options = {})
           validate_key!(key)
+          data = data.read if data.respond_to?(:read)
+
           # Must build path before infering content type in case bucket is being used for options
           path = path!(bucket, key, options)
           infer_content_type!(key, options)
